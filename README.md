@@ -1,7 +1,4 @@
-# data-mart
-Creating data mart by spark application from different sources: NoSQL, files, RDBMS.
-
-## I. С высоты птичьего полета
+## I. Первый взгляд
 
 Есть наборы данных в разных источниках:
 
