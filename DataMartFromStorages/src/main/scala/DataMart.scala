@@ -1,7 +1,21 @@
 import org.apache.spark.sql.{SparkSession, DataFrame}
 import org.apache.spark.sql.functions.{col, when, lit, regexp_replace, lower, concat, sum, explode, split}
 
+import org.postgresql.Driver
+import java.sql.{Connection, DriverManager, Statement}
+
 object DataMart {
+
+  def grantTable(): Unit = {
+    val driverClass: Class[Driver] = classOf[org.postgresql.Driver]
+    val driver: Any = Class.forName("org.postgresql.Driver").newInstance()
+    val url = "jdbc:postgresql://10.0.0.31:5432/labdata?user=daniil_devyatkin&password=8I2rBCF2"
+    val connection: Connection = DriverManager.getConnection(url)
+    val statement: Statement = connection.createStatement()
+    val bool: Boolean = statement.execute("GRANT SELECT ON visits TO labchecker2;")
+    connection.close()
+  }
+  
   def main(args: Array[String]): Unit = {
 
     val spark = SparkSession.builder()
